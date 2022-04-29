@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import  { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createTodo } from './graphql/mutations'
 import { listTodos } from './graphql/queries'
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from "./aws-exports";
 Amplify.configure(awsExports);
@@ -44,6 +46,8 @@ const App = () => {
   }
 
   return (
+    <Authenticator>
+    {({ signOut, user }) => (
     <div style={styles.container}>
       <h2>Amplify Todos</h2>
       <input
@@ -68,6 +72,8 @@ const App = () => {
         ))
       }
     </div>
+    )}
+    </Authenticator>
   )
 }
 
